@@ -1,0 +1,48 @@
+<div class="register-container">
+    <mat-card class="register-card">
+      <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form>
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="username" name="username" required />
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="showPasswordValue ? 'text' : 'password'" 
+              [(ngModel)]="password"
+              name="password"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Retype Password</mat-label>
+            <input
+              matInput
+              [type]="showPasswordValue ? 'text' : 'password'" 
+              [(ngModel)]="retypedPassword"
+              name="password"
+              required
+            />
+          </mat-form-field>
+          <mat-checkbox (click)="showPassword()">Show Password</mat-checkbox>
+          <button mat-raised-button color="primary" (click)="register()">
+            Register
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="old-user-card">
+      <mat-card-content>
+        <button mat-raised-button color="accent" routerLink="">
+          Already have an account?
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
