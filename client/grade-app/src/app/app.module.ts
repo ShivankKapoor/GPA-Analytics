@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 
 
@@ -20,7 +21,8 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
   declarations: [
     AppComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
