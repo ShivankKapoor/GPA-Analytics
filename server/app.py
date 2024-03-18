@@ -25,6 +25,25 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(80), nullable=False)
     firstName = db.Column(db.String(12), nullable=False)
     lastName = db.Column(db.String(12), nullable=False)
+    
+class Semesters(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    season = db.Column(db.String(10), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+    
+class Professors(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    lastName=db.Column(db.String(10), nullable=False)
+    
+class Classes(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(50), nullable=False)
+    number = db.Column(db.Integer, nullable=False)
+    profID = db.Column(db.Integer, db.ForeignKey('professors.id'), nullable=False)
+    semID = db.Column(db.Integer, db.ForeignKey('semesters.id'), nullable=False)
+    hours = db.Column(db.Integer, nullable=False)
+    professor = db.relationship('Professors', backref=db.backref('classes', lazy=True))
+    semester = db.relationship('Semesters', backref=db.backref('classes', lazy=True))
 
 @app.route('/login', methods=['POST'])
 def login():
