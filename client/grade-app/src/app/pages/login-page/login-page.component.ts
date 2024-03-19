@@ -12,25 +12,21 @@ export class LoginPageComponent {
   password: string = '';
   showPasswordValue: boolean = false;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   async login() {
     const credentials = { username: this.username, password: this.password };
 
     try {
-      const response = await this.http.post<any>('http://localhost:3000/login', credentials).toPromise();
+      const response = await this.http
+        .post<any>('http://localhost:3000/login', credentials)
+        .toPromise();
       const token = response.token;
-      // You may store the token in local storage or session storage for subsequent requests.
       localStorage.setItem('token', token);
-      console.log(token)
-      // Navigate to the desired route after successful login.
+      console.log(token);
       this.router.navigate(['/home']);
     } catch (error) {
       console.error('Login failed:', error);
-      // Handle login failure, e.g., show an error message to the user.
     }
   }
 

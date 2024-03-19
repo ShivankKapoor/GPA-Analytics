@@ -21,29 +21,25 @@ export class RegistrationPageComponent {
   ) {}
 
   async register() {
-    // Check if passwords match
+
     if (this.password !== this.retypedPassword) {
-      // Handle password mismatch error
       console.error('Passwords do not match');
-      // You can display an error message to the user
       return;
     }
 
     const newUser = {
       username: this.username,
       password: this.password,
-      first_name: '', // Add first name field if needed
-      last_name: ''   // Add last name field if needed
+      first_name: this.firstName,
+      last_name: this.lastName 
     };
 
     try {
       const response = await this.http.post<any>('http://localhost:3000/register', newUser).toPromise();
       console.log('Registration successful:', response);
-      // Redirect to login page after successful registration
       this.router.navigate(['/']);
     } catch (error) {
       console.error('Registration failed:', error);
-      // Handle registration failure, e.g., show an error message to the user
     }
   }
 

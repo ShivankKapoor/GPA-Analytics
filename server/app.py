@@ -6,10 +6,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from datetime import datetime, timedelta
 import os
-from flask_cors import CORS  # Import Flask-CORS
+from flask_cors import CORS 
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -97,6 +97,21 @@ def register():
 
     return jsonify({'message': 'User created successfully'}), 201
 
+
+@app.route('/user-info')
+def get_user_info():
+    token = request.headers.get('Authorization').split()[1]
+    user_id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['user_id']
+
+    user = User.query.get(user_id)
+    print("I am getting called")
+
+    return jsonify({
+        'id': user.id,
+        'username': user.username,
+        'firstName': user.firstName,
+        'lastName': user.lastName
+    })
 
 @app.route('/')
 def run():
