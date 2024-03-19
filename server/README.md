@@ -4,7 +4,7 @@
 
 ### Docker Run Command
 1. ```docker build -t grade-app-api:latest -f Dockerfile .```
-2. ```docker container run -d -p 4000:3000 grade-app-api:latest```
+2. ```docker container run -d -p 3000:3000 grade-app-api:latest```
 
 ### Regnerate SQL Database
 1. ```pipenv run python3```

@@ -6,14 +6,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from datetime import datetime, timedelta
 import os
+from flask_cors import CORS  # Import Flask-CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqllite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'a9b8f79ff7eb4a628de36661442081e8'
-    
+
 db = SQLAlchemy(app)
 
 ma = Marshmallow(app)
@@ -25,16 +28,19 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(80), nullable=False)
     firstName = db.Column(db.String(12), nullable=False)
     lastName = db.Column(db.String(12), nullable=False)
-    
+
+
 class Semesters(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     season = db.Column(db.String(10), nullable=False)
     year = db.Column(db.Integer, nullable=False)
-    
+
+
 class Professors(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    lastName=db.Column(db.String(10), nullable=False)
-    
+    lastName = db.Column(db.String(10), nullable=False)
+
+
 class Classes(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(50), nullable=False)
@@ -44,6 +50,7 @@ class Classes(db.Model, UserMixin):
     hours = db.Column(db.Integer, nullable=False)
     professor = db.relationship('Professors', backref=db.backref('classes', lazy=True))
     semester = db.relationship('Semesters', backref=db.backref('classes', lazy=True))
+
 
 class Enrollments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -62,10 +69,12 @@ def login():
     user = User.query.filter_by(username=data['username']).first()
 
     if user and check_password_hash(user.password, data['password']):
-        token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=30)}, app.config['SECRET_KEY'])
+        token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=30)},
+                           app.config['SECRET_KEY'])
         return jsonify({'token': token})
 
     return make_response('Invalid username or password', 401)
+
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -93,5 +102,7 @@ def register():
 def run():
     return "{\"UP\"}"
 
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=int(3000),debug=True)
+    app.run(host="0.0.0.0", port=int(3000), debug=True)
+

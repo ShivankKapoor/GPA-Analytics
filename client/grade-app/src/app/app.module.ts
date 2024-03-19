@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -33,7 +34,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()
