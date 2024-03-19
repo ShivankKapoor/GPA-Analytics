@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegistrationPageComponent {
   username: string = '';
+  firstName: string = '';
+  lastName: string = '';
   password: string = '';
   retypedPassword: string = '';
   showPasswordValue: boolean = false;
