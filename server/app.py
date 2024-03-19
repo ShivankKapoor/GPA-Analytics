@@ -1,3 +1,4 @@
+import random
 from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -76,6 +77,13 @@ def login():
     return make_response('Invalid username or password', 401)
 
 
+def generate_random_id():
+    while True:
+        random_id = random.randint(10000, 99999)
+        if not User.query.filter_by(id=random_id).first():
+            return random_id
+
+
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -91,7 +99,8 @@ def register():
     hashed_password = generate_password_hash(password)
 
     new_user = User(username=username, password=hashed_password, firstName=firstName, lastName=lastName)
-
+    new_user.id = generate_random_id()
+    
     db.session.add(new_user)
     db.session.commit()
 
