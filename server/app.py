@@ -45,6 +45,16 @@ class Classes(db.Model, UserMixin):
     professor = db.relationship('Professors', backref=db.backref('classes', lazy=True))
     semester = db.relationship('Semesters', backref=db.backref('classes', lazy=True))
 
+class Enrollments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    grade = db.Column(db.String(2))
+
+    enrolled_class = db.relationship('Classes', backref=db.backref('enrollments', lazy=True))
+    enrolled_user = db.relationship('User', backref=db.backref('enrollments', lazy=True))
+
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
