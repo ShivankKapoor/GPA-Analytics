@@ -16,8 +16,10 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
+import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {MatIconModule} from '@angular/material/icon';
     LoginPageComponent,
     RegistrationPageComponent,
     HomePageComponent,
-    TitleBarComponent
+    TitleBarComponent,
+    NavigationMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatCheckboxModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule,
+    MatSidenavModule
   ],
   providers: [
     provideAnimationsAsync()
