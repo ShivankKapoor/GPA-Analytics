@@ -16,7 +16,7 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
-
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
     MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync()
