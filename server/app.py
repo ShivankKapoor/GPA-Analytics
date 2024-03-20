@@ -124,7 +124,7 @@ def get_user_info():
 
 @app.route('/')
 def run():
-    return "{\"UP\"}"
+    return "{\"API IS UP\"}"
 
 
 if __name__ == '__main__':
