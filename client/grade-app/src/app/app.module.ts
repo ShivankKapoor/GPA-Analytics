@@ -15,15 +15,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TitleBarComponent } from './components/title-bar/title-bar.component';
 
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    TitleBarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    MatDividerModule,
+    MatSidenavModule
   ],
   providers: [
     provideAnimationsAsync()
