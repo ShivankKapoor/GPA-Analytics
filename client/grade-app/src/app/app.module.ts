@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TitleBarComponent } from './components/title-bar/title-bar.component';
 
 
 
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    TitleBarComponent
   ],
   imports: [
     BrowserModule,
