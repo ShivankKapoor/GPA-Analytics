@@ -16,7 +16,7 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
-import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
+
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -27,8 +27,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     LoginPageComponent,
     RegistrationPageComponent,
     HomePageComponent,
-    TitleBarComponent,
-    NavigationMenuComponent
+    TitleBarComponent
   ],
   imports: [
     BrowserModule,

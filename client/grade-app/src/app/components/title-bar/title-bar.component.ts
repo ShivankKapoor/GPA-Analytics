@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-title-bar',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './title-bar.component.scss'
 })
 export class TitleBarComponent {
+
+  constructor(public authService:AuthService){}
+
+
   toggleSidebar() {
     //this.sidebarControlService.toggleSidebar();
   }

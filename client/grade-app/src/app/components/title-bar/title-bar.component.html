@@ -1,6 +1,7 @@
 <div class="topBar">
     <div class="side-button">
       <button
+        *ngIf="authService.isLoggedIn()"
         (click)="toggleSidebar()"
         mat-mini-fab
         color="primary"
