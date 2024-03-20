@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MiniWarningService } from '../../services/mini-warning.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +13,7 @@ export class LoginPageComponent {
   password: string = '';
   showPasswordValue: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private miniWarn: MiniWarningService) {}
 
   async login() {
     const credentials = { username: this.username, password: this.password };
@@ -24,8 +25,9 @@ export class LoginPageComponent {
       const token = response.token;
       localStorage.setItem('token', token);
       console.log(token);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     } catch (error) {
+      this.miniWarn.openSnackBar("Invalid Login","Close")
       console.error('Login failed:', error);
     }
   }
