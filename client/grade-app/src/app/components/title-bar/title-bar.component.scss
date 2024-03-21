@@ -18,6 +18,16 @@
   }
   
   .side-button {
-    padding-left: 10px;
-    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5vw;
+  }
+  
+  .side-button button {
+    display: flex;
+    align-items: center;
+  }
+  
+  .side-button mat-icon {
+    margin: 0 auto;
   }

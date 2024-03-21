@@ -1,10 +1,8 @@
 <div class="topBar">
     <div class="side-button">
-      <button
+      <button mat-stroked-button
         *ngIf="authService.isLoggedIn()"
         (click)="toggleSidebar()"
-        mat-mini-fab
-        color="primary"
         aria-label="Example icon button with a menu icon"
       >
         <mat-icon>menu</mat-icon>
