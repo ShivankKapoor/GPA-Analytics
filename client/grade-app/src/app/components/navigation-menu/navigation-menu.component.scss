@@ -1,0 +1,32 @@
+.navigation-buttons {
+    width: 200px;
+    padding-top: 10px;
+  
+    .navigation-button {
+      justify-content: flex-start;
+      width: 200px;
+    }
+  
+    .navigation-button-div {
+      padding-top: 1px;
+    }
+  }
+  
+  .close-button {
+    padding-top: 5px;
+    padding-right: 5px;
+  
+    margin-left: 150px;
+  }
+  
+  .image {
+    padding-top: 5px;
+    padding-left: 5px;
+    width: 20%;
+    height: auto;
+    position: absolute;
+  }
+  
+  .menu-divider {
+    margin-top: 10px;
+  }

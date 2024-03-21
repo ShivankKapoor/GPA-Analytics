@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { SidebarControlService } from '../navigation-menu/sidebar-control.service';
 
 @Component({
   selector: 'app-title-bar',
@@ -8,10 +9,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class TitleBarComponent {
 
-  constructor(public authService:AuthService){}
+  constructor(public authService:AuthService, private sidebarControlService:SidebarControlService){}
 
 
   toggleSidebar() {
-    //this.sidebarControlService.toggleSidebar();
+    this.sidebarControlService.toggleSidebar();
   }
 }

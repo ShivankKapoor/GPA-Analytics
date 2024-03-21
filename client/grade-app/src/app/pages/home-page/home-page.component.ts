@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +10,7 @@ import { DataService } from '../../services/data.service';
 export class HomePageComponent {
   firstName: string="";
   lastName: string="";
-  constructor(private userService:DataService){}
+  constructor(private userService:DataService, private auth:AuthService){}
 
   ngOnInit(): void {
     this.userService.getUserInfo().subscribe(
@@ -26,7 +27,6 @@ export class HomePageComponent {
   }
 
   logout(){
-    localStorage.removeItem('token');
-    window.location.reload();
+    this.auth.logout()
   }
 }
