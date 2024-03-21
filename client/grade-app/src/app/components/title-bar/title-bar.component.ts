@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { SidebarControlService } from '../navigation-menu/sidebar-control.service';
+import { SidebarControlService } from '../../services/sidebar-control.service';
 
 @Component({
   selector: 'app-title-bar',
