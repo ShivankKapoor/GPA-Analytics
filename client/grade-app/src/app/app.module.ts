@@ -20,6 +20,7 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     LoginPageComponent,
     RegistrationPageComponent,
     HomePageComponent,
-    TitleBarComponent
+    TitleBarComponent,
+    NavigationMenuComponent
   ],
   imports: [
     BrowserModule,
