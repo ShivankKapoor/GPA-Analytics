@@ -124,7 +124,9 @@ def get_user_info():
 
 @app.route('/')
 def run():
-    return "{\"API IS UP\"}"
+    return jsonify({
+        'status':"UP"
+    })
 
 
 if __name__ == '__main__':
