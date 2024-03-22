@@ -49,6 +49,7 @@ class Classes(db.Model, UserMixin):
     profID = db.Column(db.Integer, db.ForeignKey('professors.id'), nullable=False)
     semID = db.Column(db.Integer, db.ForeignKey('semesters.id'), nullable=False)
     hours = db.Column(db.Integer, nullable=False)
+    classDesc=db.Columns(db.String(100), nullable=False)
     professor = db.relationship('Professors', backref=db.backref('classes', lazy=True))
     semester = db.relationship('Semesters', backref=db.backref('classes', lazy=True))
 
