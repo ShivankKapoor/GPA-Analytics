@@ -49,7 +49,7 @@ class Classes(db.Model, UserMixin):
     profID = db.Column(db.Integer, db.ForeignKey('professors.id'), nullable=False)
     semID = db.Column(db.Integer, db.ForeignKey('semesters.id'), nullable=False)
     hours = db.Column(db.Integer, nullable=False)
-    classDesc=db.Columns(db.String(100), nullable=False)
+    classDesc=db.Column(db.String(100), nullable=False)
     professor = db.relationship('Professors', backref=db.backref('classes', lazy=True))
     semester = db.relationship('Semesters', backref=db.backref('classes', lazy=True))
 
@@ -122,6 +122,52 @@ def get_user_info():
         'firstName': user.firstName,
         'lastName': user.lastName
     })
+
+@app.route('/create-prof', methods=['POST'])
+def create_prof():
+    data=request.json
+    lastName=data.get('lastName')
+    new_prof = Professors(lastName=lastName)
+    db.session.add(new_prof)
+    db.session.commit()
+    return jsonify({'message':'Semester Created'}),201
+   
+@app.route('/create-sem', methods=['POST'])
+def create_sem():
+     data=request.json
+     season=data.get('season')
+     year=data.get('year')
+     new_sem = Semesters(season=season,year=year)
+     db.session.add(new_sem)
+     db.session.commit()
+     return jsonify({'message':'Semester Created'}),201
+    
+
+@app.route('/create-class', methods=['POST'])
+def create_class():
+    data = request.json
+    subject = data.get('subject')
+    number = data.get('number')
+    prof_id = data.get('profID')
+    sem_id = data.get('semID')
+    hours = data.get('hours')
+    class_desc = data.get('classDesc')
+
+    professor = Professors.query.get(prof_id)
+    semester = Semesters.query.get(sem_id)
+    if not professor:
+        return jsonify({'message': 'Professor does not exist'}), 400
+    if not semester:
+        return jsonify({'message': 'Semester does not exist'}), 400
+
+    new_class = Classes(subject=subject, number=number, profID=prof_id, semID=sem_id, 
+                        hours=hours, classDesc=class_desc)
+
+    db.session.add(new_class)
+    db.session.commit()
+
+    return jsonify({'message': 'Class created successfully'}), 201
+
 
 @app.route('/')
 def run():
