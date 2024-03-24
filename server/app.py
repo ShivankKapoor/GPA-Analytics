@@ -130,7 +130,7 @@ def create_prof():
     new_prof = Professors(lastName=lastName)
     db.session.add(new_prof)
     db.session.commit()
-    return jsonify({'message':'Semester Created'}),201
+    return jsonify({'message':'Prof Created'}),201
 
 @app.route('/get-profs', methods=['GET'])
 def get_profs():

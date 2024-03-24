@@ -9,7 +9,7 @@ import { DataService } from '../../services/data.service';
 })
 export class AddClassPageComponent implements OnInit {
   myForm!: FormGroup; 
-  professors: string[] = ['Professor 1', 'Professor 2', 'Professor 3'];
+  professors: string[] = [];
   semesters: string[] = [];
 
   constructor(private fb: FormBuilder, private data:DataService) {}
@@ -29,6 +29,15 @@ export class AddClassPageComponent implements OnInit {
         const element = semsArray.semesters[i];
         const displayString = (element.season+" "+element.year)
         this.semesters.push(displayString)
+      }
+    })
+
+    this.data.getAllProfs().subscribe((profsArray)=>{
+      console.log(profsArray.professors)
+      for (let i = 0; i < profsArray.professors.length; i++) {
+        const element = profsArray.professors[i];
+        const displayString = (element.lastName)
+        this.professors.push(displayString)
       }
     })
   }

@@ -30,4 +30,9 @@ export class DataService {
     var requestURL=this.apiUrl.concat("/get-sems")
     return this.http.get<any[]>(requestURL)
   }
+
+  getAllProfs(): Observable<any>{
+    var requestURL=this.apiUrl.concat("/get-profs")
+    return this.http.get<any[]>(requestURL)
+  }
 }
