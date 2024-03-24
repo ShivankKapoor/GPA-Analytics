@@ -24,7 +24,12 @@ export class NavigationMenuComponent {
   }
 
   goHome() {
-    this.router.navigate(['home']);
+    this.router.navigate(['']);
+    this.closeMenu();
+  }
+
+  goAdd(){
+    this.router.navigate(['add-class']);
     this.closeMenu();
   }
 

@@ -21,6 +21,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
+import { AddClassPageComponent } from './pages/add-class-page/add-class-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NavigationMenuComponent } from './components/navigation-menu/navigation
     RegistrationPageComponent,
     HomePageComponent,
     TitleBarComponent,
-    NavigationMenuComponent
+    NavigationMenuComponent,
+    AddClassPageComponent
   ],
   imports: [
     BrowserModule,
