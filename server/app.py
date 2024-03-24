@@ -131,6 +131,18 @@ def create_prof():
     db.session.add(new_prof)
     db.session.commit()
     return jsonify({'message':'Semester Created'}),201
+
+@app.route('/get-profs', methods=['GET'])
+def get_profs():
+    professors = Professors.query.all()
+    professors_data = []
+    for professor in professors:
+        professors_data.append({
+            'id': professor.id,
+            'lastName': professor.lastName
+        })
+    return jsonify({'professors': professors_data})
+
    
 @app.route('/create-sem', methods=['POST'])
 def create_sem():
@@ -141,7 +153,18 @@ def create_sem():
      db.session.add(new_sem)
      db.session.commit()
      return jsonify({'message':'Semester Created'}),201
-    
+
+@app.route('/get-sems', methods=['GET'])
+def get_sem():
+    semesters = Semesters.query.all()
+    semesters_data = []
+    for semester in semesters:
+        semesters_data.append({
+            'id': semester.id,
+            'season': semester.season,
+            'year': semester.year
+        })
+    return jsonify({'semesters': semesters_data}) 
 
 @app.route('/create-class', methods=['POST'])
 def create_class():

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-add-class-page',
@@ -9,9 +10,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class AddClassPageComponent implements OnInit {
   myForm!: FormGroup; 
   professors: string[] = ['Professor 1', 'Professor 2', 'Professor 3'];
-  semesters: string[] = ['Spring', 'Summer', 'Fall'];
+  semesters: string[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private data:DataService) {}
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -22,6 +23,14 @@ export class AddClassPageComponent implements OnInit {
       hours: ['', Validators.required],
       classDesc: ['', Validators.required]
     });
+    this.data.getAllSems().subscribe((semsArray)=>{
+      console.log(semsArray.semesters)
+      for (let i = 0; i < semsArray.semesters.length; i++) {
+        const element = semsArray.semesters[i];
+        const displayString = (element.season+" "+element.year)
+        this.semesters.push(displayString)
+      }
+    })
   }
 
   onSubmit() {
