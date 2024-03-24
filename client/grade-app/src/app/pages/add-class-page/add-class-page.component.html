@@ -1,1 +1,62 @@
-<p>add-class-page works!</p>
+<div class="card-holder">
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Add a Class</mat-card-title>
+  </mat-card-header>
+  <form class="example-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Subject</mat-label>
+      <input matInput formControlName="subject" placeholder="Subject" />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Number</mat-label>
+      <input
+        matInput
+        formControlName="number"
+        type="number"
+        placeholder="Number"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Professor</mat-label>
+      <mat-select formControlName="professor" placeholder="Professor">
+        <mat-option *ngFor="let professor of professors" [value]="professor">{{
+          professor
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Semester</mat-label>
+      <mat-select formControlName="semester" placeholder="Semester">
+        <mat-option *ngFor="let semester of semesters" [value]="semester">{{
+          semester
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Hours</mat-label>
+      <input
+        matInput
+        formControlName="hours"
+        type="number"
+        placeholder="Hours"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Class Name</mat-label>
+      <input
+        matInput
+        formControlName="classDesc"
+        placeholder="Class Description"
+      />
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" color="primary" class="submit-button">Submit</button>
+  </form>
+</mat-card>
+</div>

@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: -60px;
+}
+
+.card{
+
+  width: 35vw;
+  height: 80vh;
+}
+
+.example-form {
+  width: 25vw;
+  margin: auto;
+}
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  mat-form-field {
+    margin-bottom: 20px;
+  }
+  
+  .submit-button{
+    color: white;
+  }

@@ -22,6 +22,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
 import { AddClassPageComponent } from './pages/add-class-page/add-class-page.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AddClassPageComponent } from './pages/add-class-page/add-class-page.com
     HttpClientModule,
     MatIconModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule
   ],
   providers: [
     provideAnimationsAsync()
