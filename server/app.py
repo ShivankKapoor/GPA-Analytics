@@ -175,14 +175,6 @@ def create_class():
     sem_id = data.get('semID')
     hours = data.get('hours')
     class_desc = data.get('classDesc')
-
-    professor = Professors.query.get(prof_id)
-    semester = Semesters.query.get(sem_id)
-    if not professor:
-        return jsonify({'message': 'Professor does not exist'}), 400
-    if not semester:
-        return jsonify({'message': 'Semester does not exist'}), 400
-
     new_class = Classes(subject=subject, number=number, profID=prof_id, semID=sem_id, 
                         hours=hours, classDesc=class_desc)
 
