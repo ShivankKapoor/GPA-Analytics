@@ -6,12 +6,13 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AuthGuard } from './guards/authGuard';
 import { reLoginGuard } from './guards/reLoginGuard';
 import { AddClassPageComponent } from './pages/add-class-page/add-class-page.component';
+import { noInternetGuard } from './guards/noInternetGuard';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent, canActivate: [AuthGuard]},
+  { path: '', component: HomePageComponent, canActivate: [AuthGuard, noInternetGuard]},
   { path: 'register', component: RegistrationPageComponent, canActivate: [reLoginGuard]},
   {path: 'login', component:LoginPageComponent, canActivate: [reLoginGuard]},
-  { path: 'add-class', component: AddClassPageComponent, canActivate: [AuthGuard]}
+  { path: 'add-class', component: AddClassPageComponent, canActivate: [AuthGuard, noInternetGuard]}
 ];
 
 @NgModule({
