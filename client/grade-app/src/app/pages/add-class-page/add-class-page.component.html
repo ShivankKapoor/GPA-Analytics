@@ -25,6 +25,9 @@
         <mat-option *ngFor="let professor of professors" [value]="professor">{{
           professor
         }}</mat-option>
+        <mat-option>
+          <button mat-flat-button class="add-button" color="accent" (click)="testClick()"><mat-icon>add</mat-icon>Add Professor</button>
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -34,6 +37,9 @@
         <mat-option *ngFor="let semester of semesters" [value]="semester">{{
           semester
         }}</mat-option>
+        <mat-option>
+          <button mat-flat-button class="add-button" color="accent" (click)="testClick()"><mat-icon>add</mat-icon>Add Professor</button>
+        </mat-option>
       </mat-select>
     </mat-form-field>
 

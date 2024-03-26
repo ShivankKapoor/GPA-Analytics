@@ -53,6 +53,10 @@ export class AddClassPageComponent implements OnInit {
     }
   }
 
+  testClick(){
+    console.log("Clicked")
+  }
+
   async onSubmit() {
     if (this.myForm.valid) {
       var profId;
