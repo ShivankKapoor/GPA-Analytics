@@ -27,7 +27,8 @@ export class AddClassPageComponent implements OnInit {
       professor: ['', Validators.required],
       semester: ['', Validators.required],
       hours: ['', Validators.required],
-      classDesc: ['', Validators.required]
+      classDesc: ['', Validators.required],
+      grade: ['', Validators.required]
     });
 
     this.loadProfessorsAndSemesters();

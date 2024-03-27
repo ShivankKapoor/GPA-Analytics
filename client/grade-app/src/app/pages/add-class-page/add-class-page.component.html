@@ -62,6 +62,25 @@
       />
     </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <mat-label>Grade</mat-label>
+      <mat-select formControlName="grade" placeholder="Grade">
+        <mat-option value="A+">A+</mat-option>
+        <mat-option value="A">A</mat-option>
+        <mat-option value="A-">A-</mat-option>
+        <mat-option value="B+">B+</mat-option>
+        <mat-option value="B">B</mat-option>
+        <mat-option value="B-">B-</mat-option>
+        <mat-option value="C+">C+</mat-option>
+        <mat-option value="C">C</mat-option>
+        <mat-option value="F">F</mat-option>
+        <mat-option value="I">I</mat-option>
+        <mat-option value="P">P</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    
+
     <button mat-raised-button type="submit" color="primary" class="submit-button">Submit</button>
   </form>
 </mat-card>
