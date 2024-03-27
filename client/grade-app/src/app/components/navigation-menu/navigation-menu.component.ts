@@ -33,6 +33,15 @@ export class NavigationMenuComponent {
     this.closeMenu();
   }
 
+  goAddSem(){
+    this.router.navigate(['add-sem']);
+    this.closeMenu();
+  }
+
+  goAddProf(){
+    this.router.navigate(['add-prof']);
+    this.closeMenu();
+  }
 
   closeMenu() {
     this.sidebarControlService.toggleSidebar();
