@@ -24,7 +24,6 @@ export class LoginPageComponent {
         .toPromise();
       const token = response.token;
       localStorage.setItem('token', token);
-      console.log(token);
       this.router.navigate(['/']);
     } catch (error) {
       this.miniWarn.openSnackBar("Invalid Login","Close")

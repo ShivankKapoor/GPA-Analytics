@@ -99,11 +99,26 @@ export class AddClassPageComponent implements OnInit {
           classDesc:this.myForm.value.classDesc
         };
 
-        console.log(newClass);
 
         try {
           const response = await this.http.post<any>('http://localhost:3000/create-class', newClass).toPromise();
-          console.log('Class successful:', response);
+          console.log(response)
+          var classID=response.classID;
+          var userID=this.data.getUserID();
+          var newEnroll={
+            classID:classID,
+            userID:userID,
+            Grade:this.myForm.value.grade
+          }
+          
+          try{
+            const enrollResponse = await this.http.post<any>('http://localhost:3000/create-enrollment', newEnroll).toPromise();
+            console.log(enrollResponse)
+          }catch(error){
+            console.error('Class Enrollment failed:', error);
+          }
+
+
           this.router.navigate(['/']);
         } catch (error) {
           console.error('Class Creation failed:', error);

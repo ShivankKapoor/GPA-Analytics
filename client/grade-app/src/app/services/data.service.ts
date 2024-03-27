@@ -8,7 +8,8 @@ import { Observable, throwError } from 'rxjs';
 export class DataService {
 
   private apiUrl = 'http://localhost:3000';
-
+  private userId: any;
+  
   constructor(private http: HttpClient) { }
 
   getUserInfo(): Observable<any> {
@@ -34,5 +35,13 @@ export class DataService {
   getAllProfs(): Observable<any>{
     var requestURL=this.apiUrl.concat("/get-profs")
     return this.http.get<any[]>(requestURL)
+  }
+
+  setUserID(id:any){
+    this.userId=id;
+  }
+  
+  getUserID(){
+    return this.userId;
   }
 }

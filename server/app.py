@@ -175,14 +175,28 @@ def create_class():
     sem_id = data.get('semID')
     hours = data.get('hours')
     class_desc = data.get('classDesc')
-    new_class = Classes(subject=subject, number=number, profID=prof_id, semID=sem_id, 
+
+    new_class = Classes(subject=subject, number=number, profID=prof_id, semID=sem_id,
                         hours=hours, classDesc=class_desc)
 
     db.session.add(new_class)
     db.session.commit()
 
-    return jsonify({'message': 'Class created successfully'}), 201
+    class_id = new_class.id
 
+    return jsonify({'message': 'Class created successfully', 'classID': class_id}), 201
+
+@app.route('/create-enrollment', methods=['POST'])
+def create_enrollment():
+    data=request.json
+    classID=data.get('classID')
+    userID=data.get('userID')
+    Grade=data.get('Grade')
+    new_enroll = Enrollments(class_id=classID, user_id=userID, grade=Grade)
+    db.session.add(new_enroll)
+    db.session.commit()
+    return jsonify({'message':'Enrolled'}),201
+    
 
 @app.route('/')
 def run():
