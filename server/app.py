@@ -59,7 +59,6 @@ class Enrollments(db.Model):
     class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     grade = db.Column(db.String(2))
-
     enrolled_class = db.relationship('Classes', backref=db.backref('enrollments', lazy=True))
     enrolled_user = db.relationship('User', backref=db.backref('enrollments', lazy=True))
 
@@ -67,14 +66,11 @@ class Enrollments(db.Model):
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
-
     user = User.query.filter_by(username=data['username']).first()
-
     if user and check_password_hash(user.password, data['password']):
         token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=30)},
                            app.config['SECRET_KEY'])
         return jsonify({'token': token})
-
     return make_response('Invalid username or password', 401)
 
 
@@ -92,19 +88,14 @@ def register():
     password = data.get('password')
     firstName = data.get('first_name')
     lastName = data.get('last_name')
-
     existing_user = User.query.filter_by(username=username).first()
     if existing_user:
         return make_response(jsonify({'message': 'Username already exists'}), 400)
-
     hashed_password = generate_password_hash(password)
-
     new_user = User(username=username, password=hashed_password, firstName=firstName, lastName=lastName)
     new_user.id = generate_random_id()
-    
     db.session.add(new_user)
     db.session.commit()
-
     return jsonify({'message': 'User created successfully'}), 201
 
 
@@ -175,15 +166,11 @@ def create_class():
     sem_id = data.get('semID')
     hours = data.get('hours')
     class_desc = data.get('classDesc')
-
     new_class = Classes(subject=subject, number=number, profID=prof_id, semID=sem_id,
                         hours=hours, classDesc=class_desc)
-
     db.session.add(new_class)
     db.session.commit()
-
     class_id = new_class.id
-
     return jsonify({'message': 'Class created successfully', 'classID': class_id}), 201
 
 @app.route('/create-enrollment', methods=['POST'])
