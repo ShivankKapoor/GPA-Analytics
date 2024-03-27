@@ -1,0 +1,14 @@
+app-title-bar {
+    position: sticky;
+    position: -webkit-sticky; 
+    top: 0; 
+    z-index: 1000;
+    background-color: white;
+}
+
+app-navigation-menu {
+    position: sticky;
+    position: -webkit-sticky; 
+    top: 0; 
+    z-index: 1000;
+}
