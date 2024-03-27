@@ -7,12 +7,16 @@ import { AuthGuard } from './guards/authGuard';
 import { reLoginGuard } from './guards/reLoginGuard';
 import { AddClassPageComponent } from './pages/add-class-page/add-class-page.component';
 import { noInternetGuard } from './guards/noInternetGuard';
+import { AddProfPageComponent } from './pages/add-prof-page/add-prof-page.component';
+import { AddSemPageComponent } from './pages/add-sem-page/add-sem-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: [AuthGuard, noInternetGuard]},
   { path: 'register', component: RegistrationPageComponent, canActivate: [reLoginGuard]},
   {path: 'login', component:LoginPageComponent, canActivate: [reLoginGuard]},
-  { path: 'add-class', component: AddClassPageComponent, canActivate: [AuthGuard, noInternetGuard]}
+  { path: 'add-class', component: AddClassPageComponent, canActivate: [AuthGuard, noInternetGuard]},
+  {path: 'add-prof', component:AddProfPageComponent, canActivate:[AuthGuard,noInternetGuard]},
+  {path: 'add-sem', component:AddSemPageComponent, canActivate:[AuthGuard,noInternetGuard]}
 ];
 
 @NgModule({

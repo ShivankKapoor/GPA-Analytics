@@ -54,8 +54,12 @@ export class AddClassPageComponent implements OnInit {
     }
   }
 
-  testClick(){
-    console.log("Clicked")
+  addProfClick(){
+    this.router.navigate(['/add-prof']);
+  }
+  
+  addSemClick(){
+    this.router.navigate(['/add-sem']);
   }
 
   async onSubmit() {

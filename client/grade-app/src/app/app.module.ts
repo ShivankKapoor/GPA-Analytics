@@ -23,6 +23,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
 import { AddClassPageComponent } from './pages/add-class-page/add-class-page.component';
 import {MatSelectModule} from '@angular/material/select';
+import { AddProfPageComponent } from './pages/add-prof-page/add-prof-page.component';
+import { AddSemPageComponent } from './pages/add-sem-page/add-sem-page.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import {MatSelectModule} from '@angular/material/select';
     HomePageComponent,
     TitleBarComponent,
     NavigationMenuComponent,
-    AddClassPageComponent
+    AddClassPageComponent,
+    AddProfPageComponent,
+    AddSemPageComponent
   ],
   imports: [
     BrowserModule,
