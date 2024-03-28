@@ -16,8 +16,11 @@ export class HomePageComponent {
     this.userService.getUserInfo().subscribe(
       (response) => {
         this.data.setUserID(response.id);
-        this.firstName = response.firstName;
-        this.lastName =response.lastName;
+        this.data.setfirstName(response.firstName)
+        this.data.setLastName(response.lastName)
+        if(response.lastName==null){
+          this.auth.logout()
+        }
       },
       (error) => {
         console.error('Error fetching user info:', error);

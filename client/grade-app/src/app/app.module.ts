@@ -25,6 +25,7 @@ import { AddClassPageComponent } from './pages/add-class-page/add-class-page.com
 import {MatSelectModule} from '@angular/material/select';
 import { AddProfPageComponent } from './pages/add-prof-page/add-prof-page.component';
 import { AddSemPageComponent } from './pages/add-sem-page/add-sem-page.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AddSemPageComponent } from './pages/add-sem-page/add-sem-page.component
     MatIconModule,
     MatDividerModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
   ],
   providers: [
     provideAnimationsAsync()

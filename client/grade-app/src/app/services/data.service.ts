@@ -9,6 +9,8 @@ export class DataService {
 
   private apiUrl = 'http://localhost:3000';
   private userId: any;
+  private firstName: any;
+  private lastName: any;
   
   constructor(private http: HttpClient) { }
 
@@ -43,5 +45,21 @@ export class DataService {
   
   getUserID(){
     return this.userId;
+  }
+
+  setfirstName(firstName:any){
+    this.firstName=firstName;
+  }
+  
+  getFirstName(){
+    return this.firstName;
+  }
+
+  setLastName(lastName:any){
+    this.lastName=lastName;
+  }
+  
+  getLastName(){
+    return this.lastName;
   }
 }
