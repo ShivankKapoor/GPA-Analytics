@@ -1,1 +1,24 @@
-<p>add-prof-page works!</p>
+<div class="card-holder">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Add a Professor</mat-card-title>
+      </mat-card-header>
+  
+      <form class="example-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Professor Name</mat-label>
+            <input matInput formControlName="professorName" placeholder="Professor Name" />
+          </mat-form-field>
+
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          class="submit-button"
+        >
+          Submit
+        </button>
+      </form>
+    </mat-card>
+  </div>
+  
