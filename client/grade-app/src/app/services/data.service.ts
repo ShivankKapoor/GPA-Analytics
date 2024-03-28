@@ -39,6 +39,21 @@ export class DataService {
     return this.http.get<any[]>(requestURL)
   }
 
+  getAllEnrollments(): Observable<any>{
+    var requestURL=this.apiUrl.concat("/get-enrollments")
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No token found');
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<any>(requestURL, { headers });
+  }
+
   setUserID(id:any){
     this.userId=id;
   }

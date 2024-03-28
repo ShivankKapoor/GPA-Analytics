@@ -26,6 +26,10 @@ export class HomePageComponent {
         console.error('Error fetching user info:', error);
       }
     );
+
+    this.data.getAllEnrollments().subscribe(Response=>{
+      console.log(Response)
+    })
   }
 
   logout(){

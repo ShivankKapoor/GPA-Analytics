@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import join
 import jwt
 from datetime import datetime, timedelta
 import os
@@ -113,6 +114,57 @@ def get_user_info():
         'firstName': user.firstName,
         'lastName': user.lastName
     })
+
+
+@app.route('/get-enrollments', methods=['GET'])
+def get_enrollments():
+    auth_header = request.headers.get('Authorization')
+    if not auth_header:
+        return make_response(jsonify({'message': 'Authorization header is missing'}), 401)
+
+    token = auth_header.split()[1] if len(auth_header.split()) > 1 else None
+    if not token:
+        return make_response(jsonify({'message': 'Token is missing'}), 401)
+
+    try:
+        user_id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['user_id']
+    except jwt.ExpiredSignatureError:
+        return make_response(jsonify({'message': 'Token is expired'}), 401)
+    except jwt.InvalidTokenError:
+        return make_response(jsonify({'message': 'Invalid token'}), 401)
+
+    user_enrollments = Enrollments.query.filter_by(user_id=user_id).all()
+
+    enrollments_data = []
+    for enrollment in user_enrollments:
+        enrollment_info = db.session.query(Enrollments, Classes).\
+            join(Classes, Classes.id == Enrollments.class_id).\
+            filter(Enrollments.id == enrollment.id).first()
+
+        enrollment_id = enrollment_info.Enrollments.id
+        class_info = enrollment_info.Classes
+        class_id = class_info.id
+        subject = class_info.subject
+        number = class_info.number
+        prof_id = class_info.profID
+        sem_id = class_info.semID
+        hours = class_info.hours
+        class_desc = class_info.classDesc
+
+        enrollments_data.append({
+            'enrollment_id': enrollment_id,
+            'class_id': class_id,
+            'subject': subject,
+            'number': number,
+            'prof_id': prof_id,
+            'sem_id': sem_id,
+            'hours': hours,
+            'class_desc': class_desc,
+            'grade': enrollment.grade
+        })
+
+    return jsonify({'enrollments': enrollments_data})
+
 
 @app.route('/create-prof', methods=['POST'])
 def create_prof():
