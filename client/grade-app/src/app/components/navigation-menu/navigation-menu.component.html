@@ -1,37 +1,66 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav
-      class="side-nav"
-      #sidenav
-      [fixedInViewport]="true"
-      mode="side"
-      [(opened)]="opened"
-      (opened)="events.push('open!')"
-      (closed)="events.push('close!')"
-    >
-      <div class="image-div">
-        <img class="image" src="assets/Logo.png" />
-      </div>
-      <div class="close-button">
-        <button mat-icon-button color="warn" (click)="closeMenu()">
-          <mat-icon>close</mat-icon>
+  <mat-sidenav
+    class="side-nav"
+    #sidenav
+    [fixedInViewport]="true"
+    mode="side"
+    [(opened)]="opened"
+    (opened)="events.push('open!')"
+    (closed)="events.push('close!')"
+  >
+    <div class="image-div">
+      <img class="image" src="assets/Logo.png" />
+    </div>
+    <div class="close-button">
+      <button mat-icon-button color="warn" (click)="closeMenu()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="navigation-buttons">
+      <div class="navigation-button-div">
+        <button class="navigation-button" mat-button (click)="goHome()">
+          <mat-icon>home</mat-icon>
+          Home
         </button>
       </div>
-      <div class="navigation-buttons">
-        <div class="navigation-button-div">
-          <button class="navigation-button" mat-button (click)="goHome()">
-            <mat-icon>settings</mat-icon>
-            Button 1
-          </button>
-        </div>
+    </div>
+    <div class="navigation-buttons">
+      <div class="navigation-button-div">
+        <button class="navigation-button" mat-button (click)="goAdd()">
+          <mat-icon>add</mat-icon>
+          Add Class
+        </button>
       </div>
-      <mat-divider class="menu-divider"></mat-divider>
-      <div class="navigation-buttons">
-        <div class="navigation-button-div">
-          <button color="warn" class="navigation-button" mat-button (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            Logout
-          </button>
-        </div>
+    </div>
+    <div class="navigation-buttons">
+      <div class="navigation-button-div">
+        <button class="navigation-button" mat-button (click)="goAddSem()">
+          <mat-icon>school</mat-icon>
+          Add Semester
+        </button>
       </div>
-    </mat-sidenav>
-  </mat-sidenav-container>
+    </div>
+    <div class="navigation-buttons">
+      <div class="navigation-button-div">
+        <button class="navigation-button" mat-button (click)="goAddProf()">
+          <mat-icon>person_add</mat-icon>
+          Add Professor
+        </button>
+      </div>
+    </div>
+    <mat-divider class="menu-divider"></mat-divider>
+    <div class="navigation-buttons">
+      <div class="navigation-button-div">
+        <button
+          color="warn"
+          class="navigation-button"
+          mat-button
+          (click)="logout()"
+        >
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>

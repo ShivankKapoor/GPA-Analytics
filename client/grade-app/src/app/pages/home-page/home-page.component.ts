@@ -10,15 +10,14 @@ import { AuthService } from '../../services/auth.service';
 export class HomePageComponent {
   firstName: string="";
   lastName: string="";
-  constructor(private userService:DataService, private auth:AuthService){}
+  constructor(private userService:DataService, private auth:AuthService, private data:DataService){}
 
   ngOnInit(): void {
     this.userService.getUserInfo().subscribe(
       (response) => {
+        this.data.setUserID(response.id);
         this.firstName = response.firstName;
         this.lastName =response.lastName;
-        console.log(this.firstName)
-        console.log(this.lastName)
       },
       (error) => {
         console.error('Error fetching user info:', error);

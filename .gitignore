@@ -36,6 +36,7 @@ client/grade-app/.angular/cache
 /libpeerconnection.log
 testem.log
 /typings
+/server/__pycache__
 
 # System files
 .DS_Store

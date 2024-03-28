@@ -24,10 +24,24 @@ export class NavigationMenuComponent {
   }
 
   goHome() {
-    this.router.navigate(['home']);
+    this.router.navigate(['']);
     this.closeMenu();
   }
 
+  goAdd(){
+    this.router.navigate(['add-class']);
+    this.closeMenu();
+  }
+
+  goAddSem(){
+    this.router.navigate(['add-sem']);
+    this.closeMenu();
+  }
+
+  goAddProf(){
+    this.router.navigate(['add-prof']);
+    this.closeMenu();
+  }
 
   closeMenu() {
     this.sidebarControlService.toggleSidebar();

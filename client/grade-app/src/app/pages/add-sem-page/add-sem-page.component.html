@@ -1,0 +1,37 @@
+<div class="card-holder">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Add a Semester</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Season</mat-label>
+        <mat-select formControlName="season" placeholder="Season">
+          <mat-option value="Fall">Fall</mat-option>
+          <mat-option value="Winter">Winter</mat-option>
+          <mat-option value="Spring">Spring</mat-option>
+          <mat-option value="Summer">Summer</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Year</mat-label>
+        <input
+          matInput
+          formControlName="year"
+          type="number"
+          placeholder="Year"
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="submit-button"
+      >
+        Submit
+      </button>
+    </form>
+  </mat-card>
+</div>
