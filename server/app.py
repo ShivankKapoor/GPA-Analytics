@@ -37,6 +37,11 @@ class Semesters(db.Model, UserMixin):
     season = db.Column(db.String(10), nullable=False)
     year = db.Column(db.Integer, nullable=False)
 
+class semesterSchema(ma.Schema):
+    class Meta:
+        fields = ('id','season','year')
+
+semester_schema = semesterSchema()
 
 class Professors(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -198,7 +203,7 @@ def create_sem():
      return jsonify({'message':'Semester Created'}),201
 
 @app.route('/get-sems', methods=['GET'])
-def get_sem():
+def get_sems():
     semesters = Semesters.query.all()
     semesters_data = []
     for semester in semesters:
@@ -208,6 +213,12 @@ def get_sem():
             'year': semester.year
         })
     return jsonify({'semesters': semesters_data}) 
+
+@app.route('/get-sem/<id>', methods=['GET'])
+def get_sem(id):
+    sem = Semesters.query.get(id)
+    return semester_schema.jsonify(sem)
+    
 
 @app.route('/create-class', methods=['POST'])
 def create_class():
