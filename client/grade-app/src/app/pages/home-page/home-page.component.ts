@@ -5,27 +5,50 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss'
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent {
-  firstName: string="";
-  lastName: string="";
-  constructor(private userService:DataService, private auth:AuthService, private data:DataService){}
+  firstName: string = '';
+  lastName: string = '';
+  enrollmentData = [];
+  displayedColumns: string[] = ['subject','number','class_desc','grade','professor_last_name'];
+  constructor(
+    private userService: DataService,
+    private auth: AuthService,
+    private data: DataService
+  ) {}
 
-  ngOnInit(): void {
-    this.userService.getUserInfo().subscribe(
-      (response) => {
-        this.data.setUserID(response.id);
-        this.firstName = response.firstName;
-        this.lastName =response.lastName;
-      },
-      (error) => {
-        console.error('Error fetching user info:', error);
-      }
-    );
+  async ngOnInit(): Promise<void> {
+    await this.getData();
+    console.log(this.enrollmentData);
+
   }
 
-  logout(){
-    this.auth.logout()
+  async getData() {
+    try {
+      const userInfo = await this.userService.getUserInfo().toPromise();
+
+      this.data.setUserID(userInfo.id);
+      this.data.setfirstName(userInfo.firstName);
+      this.data.setLastName(userInfo.lastName);
+
+      if (userInfo.lastName == null) {
+        this.auth.logout();
+      }
+
+      const enrollmentsResponse = await this.data
+        .getAllEnrollments()
+        .toPromise();
+
+      //console.log(enrollmentsResponse.enrollments);
+      //console.log(enrollmentsResponse.enrollments.length);
+      this.enrollmentData = enrollmentsResponse.enrollments;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }

@@ -1,14 +1,15 @@
 app-title-bar {
-    position: sticky;
-    position: -webkit-sticky; 
-    top: 0; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     background-color: white;
 }
 
 app-navigation-menu {
     position: sticky;
-    position: -webkit-sticky; 
+    position: -webkit-sticky;
     top: 0; 
     z-index: 1000;
 }

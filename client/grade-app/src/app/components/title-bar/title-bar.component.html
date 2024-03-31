@@ -1,14 +1,23 @@
 <div class="topBar">
-    <div class="side-button">
-      <button mat-stroked-button
-        *ngIf="authService.isLoggedIn()"
-        (click)="toggleSidebar()"
-        aria-label="Example icon button with a menu icon"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-    </div>
-    <a class="link">
-      <img class="text" src="assets/Header.png" />
-    </a>
+  <div class="side-button">
+    <button
+      mat-stroked-button
+      *ngIf="authService.isLoggedIn()"
+      (click)="toggleSidebar()"
+      aria-label="Example icon button with a menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
+  <a class="link">
+    <img class="text" src="assets/Header.png" />
+  </a>
+
+  <button *ngIf="authService.isLoggedIn()" mat-button [matMenuTriggerFor]="menu" class="logout-button">
+    Hi, {{this.data.getFirstName()}} {{this.data.getLastName()}}
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item color="warn"><mat-icon>settings</mat-icon>Settings</button>
+    <button mat-menu-item color="warn" style="color: red;" (click)="logout()"><mat-icon style="color:red">logout</mat-icon>Logout</button>
+  </mat-menu>
+</div>

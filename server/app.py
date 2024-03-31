@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import join
 import jwt
 from datetime import datetime, timedelta
 import os
@@ -36,6 +37,11 @@ class Semesters(db.Model, UserMixin):
     season = db.Column(db.String(10), nullable=False)
     year = db.Column(db.Integer, nullable=False)
 
+class semesterSchema(ma.Schema):
+    class Meta:
+        fields = ('id','season','year')
+
+semester_schema = semesterSchema()
 
 class Professors(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -114,6 +120,60 @@ def get_user_info():
         'lastName': user.lastName
     })
 
+
+@app.route('/get-enrollments', methods=['GET'])
+def get_enrollments():
+    auth_header = request.headers.get('Authorization')
+    if not auth_header:
+        return make_response(jsonify({'message': 'Authorization header is missing'}), 401)
+
+    token = auth_header.split()[1] if len(auth_header.split()) > 1 else None
+    if not token:
+        return make_response(jsonify({'message': 'Token is missing'}), 401)
+
+    try:
+        user_id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['user_id']
+    except jwt.ExpiredSignatureError:
+        return make_response(jsonify({'message': 'Token is expired'}), 401)
+    except jwt.InvalidTokenError:
+        return make_response(jsonify({'message': 'Invalid token'}), 401)
+
+    user_enrollments = Enrollments.query.filter_by(user_id=user_id).all()
+
+    enrollments_data = []
+    for enrollment in user_enrollments:
+        enrollment_info = db.session.query(Enrollments, Classes, Professors, Semesters).\
+            join(Classes, Classes.id == Enrollments.class_id).\
+            join(Professors, Professors.id == Classes.profID).\
+            join(Semesters, Semesters.id == Classes.semID).\
+            filter(Enrollments.id == enrollment.id).first()
+
+        enrollment_id = enrollment_info.Enrollments.id
+        class_info = enrollment_info.Classes
+        class_id = class_info.id
+        subject = class_info.subject
+        number = class_info.number
+        professor_last_name = enrollment_info.Professors.lastName
+        sem_season = enrollment_info.Semesters.season
+        sem_year = enrollment_info.Semesters.year
+        hours = class_info.hours
+        class_desc = class_info.classDesc
+
+        enrollments_data.append({
+            'enrollment_id': enrollment_id,
+            'class_id': class_id,
+            'subject': subject,
+            'number': number,
+            'professor_last_name': professor_last_name,
+            'sem_season': sem_season,
+            'sem_year': sem_year,
+            'hours': hours,
+            'class_desc': class_desc,
+            'grade': enrollment.grade
+        })
+
+    return jsonify({'enrollments': enrollments_data})
+
 @app.route('/create-prof', methods=['POST'])
 def create_prof():
     data=request.json
@@ -146,7 +206,7 @@ def create_sem():
      return jsonify({'message':'Semester Created'}),201
 
 @app.route('/get-sems', methods=['GET'])
-def get_sem():
+def get_sems():
     semesters = Semesters.query.all()
     semesters_data = []
     for semester in semesters:
@@ -156,6 +216,12 @@ def get_sem():
             'year': semester.year
         })
     return jsonify({'semesters': semesters_data}) 
+
+@app.route('/get-sem/<id>', methods=['GET'])
+def get_sem(id):
+    sem = Semesters.query.get(id)
+    return semester_schema.jsonify(sem)
+    
 
 @app.route('/create-class', methods=['POST'])
 def create_class():
