@@ -142,8 +142,10 @@ def get_enrollments():
 
     enrollments_data = []
     for enrollment in user_enrollments:
-        enrollment_info = db.session.query(Enrollments, Classes).\
+        enrollment_info = db.session.query(Enrollments, Classes, Professors, Semesters).\
             join(Classes, Classes.id == Enrollments.class_id).\
+            join(Professors, Professors.id == Classes.profID).\
+            join(Semesters, Semesters.id == Classes.semID).\
             filter(Enrollments.id == enrollment.id).first()
 
         enrollment_id = enrollment_info.Enrollments.id
@@ -151,8 +153,9 @@ def get_enrollments():
         class_id = class_info.id
         subject = class_info.subject
         number = class_info.number
-        prof_id = class_info.profID
-        sem_id = class_info.semID
+        professor_last_name = enrollment_info.Professors.lastName
+        sem_season = enrollment_info.Semesters.season
+        sem_year = enrollment_info.Semesters.year
         hours = class_info.hours
         class_desc = class_info.classDesc
 
@@ -161,15 +164,15 @@ def get_enrollments():
             'class_id': class_id,
             'subject': subject,
             'number': number,
-            'prof_id': prof_id,
-            'sem_id': sem_id,
+            'professor_last_name': professor_last_name,
+            'sem_season': sem_season,
+            'sem_year': sem_year,
             'hours': hours,
             'class_desc': class_desc,
             'grade': enrollment.grade
         })
 
     return jsonify({'enrollments': enrollments_data})
-
 
 @app.route('/create-prof', methods=['POST'])
 def create_prof():
