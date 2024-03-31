@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MiniWarningService } from '../../services/mini-warning.service';
 
 @Component({
   selector: 'app-add-sem-page',
@@ -14,7 +15,8 @@ export class AddSemPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private warning: MiniWarningService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class AddSemPageComponent implements OnInit {
           .post<any>('http://localhost:3000/create-sem', newSem)
           .toPromise();
         this.router.navigate(['/']);
+        this.warning.openSnackBar("Semester Created!","Dismiss")
       } catch (error) {}
     } else {
     }
