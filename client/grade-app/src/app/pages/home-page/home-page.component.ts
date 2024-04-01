@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class HomePageComponent {
   firstName: string = '';
   lastName: string = '';
-  enrollmentData = [];
+  enrollmentData:any;
   hasEnrollments = false;
   displayedColumns: string[] = [
     'subject',
@@ -22,47 +23,20 @@ export class HomePageComponent {
     'professor_last_name',
   ];
   constructor(
-    private userService: DataService,
     private auth: AuthService,
-    private data: DataService
+    private data: DataService,
+    private stats:AnalyticsService
   ) {}
 
   async ngOnInit(): Promise<void> {
     await this.getData();
     console.log(this.enrollmentData);
     this.hasEnrollments = this.enrollmentData.length != 0;
+    this.data.getSemesterClasses(2)
   }
 
   async getData() {
-    try {
-      const userInfo = await this.userService.getUserInfo().toPromise();
-      this.data.setUserID(userInfo.id);
-      this.data.setfirstName(userInfo.firstName);
-      this.data.setLastName(userInfo.lastName);
-
-      if (userInfo.lastName == null) {
-        this.auth.logout();
-      }
-
-      const enrollmentsResponse = await this.data
-        .getAllEnrollments()
-        .toPromise();
-
-      enrollmentsResponse.enrollments.forEach(
-        (enrollment: {
-          semesterDisplayString: any;
-          sem_season: any;
-          sem_year: any;
-        }) => {
-          enrollment.semesterDisplayString =
-            enrollment.sem_season + ' ' + enrollment.sem_year;
-        }
-      );
-      this.enrollmentData = enrollmentsResponse.enrollments;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      this.auth.logout();
-    }
+    this.enrollmentData=await this.data.getAllEnrolls()
   }
 
   logout() {

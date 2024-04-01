@@ -147,7 +147,7 @@ def get_enrollments():
             join(Professors, Professors.id == Classes.profID).\
             join(Semesters, Semesters.id == Classes.semID).\
             filter(Enrollments.id == enrollment.id).first()
-
+            
         enrollment_id = enrollment_info.Enrollments.id
         class_info = enrollment_info.Classes
         class_id = class_info.id
@@ -156,6 +156,7 @@ def get_enrollments():
         professor_last_name = enrollment_info.Professors.lastName
         sem_season = enrollment_info.Semesters.season
         sem_year = enrollment_info.Semesters.year
+        sem_id = enrollment_info.Semesters.id
         hours = class_info.hours
         class_desc = class_info.classDesc
 
@@ -165,6 +166,7 @@ def get_enrollments():
             'subject': subject,
             'number': number,
             'professor_last_name': professor_last_name,
+            'sem_id': sem_id,
             'sem_season': sem_season,
             'sem_year': sem_year,
             'hours': hours,
