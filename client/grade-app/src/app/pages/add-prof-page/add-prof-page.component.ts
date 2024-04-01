@@ -35,7 +35,7 @@ export class AddProfPageComponent {
         const response = await this.http
           .post<any>('http://localhost:3000/create-prof', newProf)
           .toPromise();
-        this.router.navigate(['/']);
+        this.router.navigate(['/add-class']);
         this.warning.openSnackBar("Professor Created!", "Dismiss")
       } catch (error) {}
     } else {

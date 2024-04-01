@@ -36,7 +36,7 @@ export class AddSemPageComponent implements OnInit {
         const response = await this.http
           .post<any>('http://localhost:3000/create-sem', newSem)
           .toPromise();
-        this.router.navigate(['/']);
+        this.router.navigate(['/add-class']);
         this.warning.openSnackBar("Semester Created!","Dismiss")
       } catch (error) {}
     } else {
