@@ -12,7 +12,15 @@ export class HomePageComponent {
   lastName: string = '';
   enrollmentData = [];
   hasEnrollments = false;
-  displayedColumns: string[] = ['subject','number','class_desc','grade','hours','professor_last_name'];
+  displayedColumns: string[] = [
+    'subject',
+    'number',
+    'class_desc',
+    'grade',
+    'semesterDisplayString',
+    'hours',
+    'professor_last_name',
+  ];
   constructor(
     private userService: DataService,
     private auth: AuthService,
@@ -21,8 +29,8 @@ export class HomePageComponent {
 
   async ngOnInit(): Promise<void> {
     await this.getData();
-    console.log(this.enrollmentData)
-    this.hasEnrollments=this.enrollmentData.length!=0
+    console.log(this.enrollmentData);
+    this.hasEnrollments = this.enrollmentData.length != 0;
   }
 
   async getData() {
@@ -40,12 +48,20 @@ export class HomePageComponent {
         .getAllEnrollments()
         .toPromise();
 
-      //console.log(enrollmentsResponse.enrollments);
-      //console.log(enrollmentsResponse.enrollments.length);
+      enrollmentsResponse.enrollments.forEach(
+        (enrollment: {
+          semesterDisplayString: any;
+          sem_season: any;
+          sem_year: any;
+        }) => {
+          enrollment.semesterDisplayString =
+            enrollment.sem_season + ' ' + enrollment.sem_year;
+        }
+      );
       this.enrollmentData = enrollmentsResponse.enrollments;
     } catch (error) {
       console.error('Error fetching data:', error);
-      this.auth.logout()
+      this.auth.logout();
     }
   }
 
