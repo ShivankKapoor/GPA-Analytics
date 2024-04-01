@@ -11,6 +11,7 @@ export class HomePageComponent {
   firstName: string = '';
   lastName: string = '';
   enrollmentData = [];
+  hasEnrollments = false;
   displayedColumns: string[] = ['subject','number','class_desc','grade','professor_last_name'];
   constructor(
     private userService: DataService,
@@ -20,14 +21,12 @@ export class HomePageComponent {
 
   async ngOnInit(): Promise<void> {
     await this.getData();
-    console.log(this.enrollmentData);
-
+    this.hasEnrollments=this.enrollmentData.length!=0
   }
 
   async getData() {
     try {
       const userInfo = await this.userService.getUserInfo().toPromise();
-
       this.data.setUserID(userInfo.id);
       this.data.setfirstName(userInfo.firstName);
       this.data.setLastName(userInfo.lastName);
@@ -45,6 +44,7 @@ export class HomePageComponent {
       this.enrollmentData = enrollmentsResponse.enrollments;
     } catch (error) {
       console.error('Error fetching data:', error);
+      this.auth.logout()
     }
   }
 

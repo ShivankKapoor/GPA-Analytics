@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MiniWarningService } from '../../services/mini-warning.service';
 
 @Component({
   selector: 'app-registration-page',
@@ -17,7 +18,8 @@ export class RegistrationPageComponent {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private warning:MiniWarningService
   ) {}
 
   async register() {
@@ -38,6 +40,7 @@ export class RegistrationPageComponent {
       const response = await this.http.post<any>('http://localhost:3000/register', newUser).toPromise();
       console.log('Registration successful:', response);
       this.router.navigate(['/']);
+      this.warning.openSnackBar("User Created!","Dismiss")
     } catch (error) {
       console.error('Registration failed:', error);
     }
