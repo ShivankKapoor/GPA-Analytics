@@ -12,7 +12,7 @@ export class HomePageComponent {
   lastName: string = '';
   enrollmentData = [];
   hasEnrollments = false;
-  displayedColumns: string[] = ['subject','number','class_desc','grade','professor_last_name'];
+  displayedColumns: string[] = ['subject','number','class_desc','grade','hours','professor_last_name'];
   constructor(
     private userService: DataService,
     private auth: AuthService,
@@ -21,6 +21,7 @@ export class HomePageComponent {
 
   async ngOnInit(): Promise<void> {
     await this.getData();
+    console.log(this.enrollmentData)
     this.hasEnrollments=this.enrollmentData.length!=0
   }
 
