@@ -46,4 +46,9 @@ export class NavigationMenuComponent {
   closeMenu() {
     this.sidebarControlService.toggleSidebar();
   }
+
+  goChart(){
+    this.router.navigate(['GPA-chart']);
+    this.closeMenu();
+  }
 }

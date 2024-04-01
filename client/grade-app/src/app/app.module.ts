@@ -27,6 +27,7 @@ import { AddProfPageComponent } from './pages/add-prof-page/add-prof-page.compon
 import { AddSemPageComponent } from './pages/add-sem-page/add-sem-page.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
+import { GPAChartPageComponent } from './pages/gpa-chart-page/gpa-chart-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatTableModule} from '@angular/material/table';
     NavigationMenuComponent,
     AddClassPageComponent,
     AddProfPageComponent,
-    AddSemPageComponent
+    AddSemPageComponent,
+    GPAChartPageComponent
   ],
   imports: [
     BrowserModule,
