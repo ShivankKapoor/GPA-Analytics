@@ -249,6 +249,20 @@ def create_enrollment():
     db.session.add(new_enroll)
     db.session.commit()
     return jsonify({'message':'Enrolled'}),201
+
+@app.route('/update-enrollment-grade/<enrollment_id>', methods=['PUT'])
+def update_enrollment_grade(enrollment_id):
+    data = request.json
+    new_grade = data.get('new_grade')
+
+    enrollment = Enrollments.query.get(enrollment_id)
+    if not enrollment:
+        return jsonify({'message': 'Enrollment not found'}), 404
+
+    enrollment.grade = new_grade
+    db.session.commit()
+
+    return jsonify({'message': 'Enrollment grade updated successfully'}), 200
     
 
 @app.route('/')
