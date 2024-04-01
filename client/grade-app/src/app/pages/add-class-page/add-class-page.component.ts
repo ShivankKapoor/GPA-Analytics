@@ -21,6 +21,7 @@ export class AddClassPageComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
+    this.data.navigated()
     this.myForm = this.fb.group({
       subject: ['', Validators.required],
       number: ['', Validators.required],

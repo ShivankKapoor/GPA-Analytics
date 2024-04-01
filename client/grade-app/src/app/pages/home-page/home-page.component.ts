@@ -29,6 +29,7 @@ export class HomePageComponent {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    await this.data.navigated()
     await this.getData();
     console.log(this.enrollmentData);
     this.hasEnrollments = this.enrollmentData.length != 0;

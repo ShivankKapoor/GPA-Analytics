@@ -14,7 +14,24 @@ export class DataService {
   private lastName: any;
   
   constructor(private http: HttpClient,
-    private auth: AuthService) { }
+    private auth: AuthService) { 
+      
+    }
+
+  async navigated(){
+    try{
+    const userInfo = await this.getUserInfo().toPromise();
+      this.setUserID(userInfo.id);
+      this.setfirstName(userInfo.firstName);
+      this.setLastName(userInfo.lastName);
+
+      if (userInfo.lastName == null) {
+        this.auth.logout();
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   getUserInfo(): Observable<any> {
     var requestURL=this.apiUrl.concat("/user-info")
@@ -59,14 +76,7 @@ export class DataService {
   async getAllEnrolls(){
     var enrollmentData = [];
     try {
-      const userInfo = await this.getUserInfo().toPromise();
-      this.setUserID(userInfo.id);
-      this.setfirstName(userInfo.firstName);
-      this.setLastName(userInfo.lastName);
-
-      if (userInfo.lastName == null) {
-        this.auth.logout();
-      }
+      
 
       const enrollmentsResponse = await this
         .getData()

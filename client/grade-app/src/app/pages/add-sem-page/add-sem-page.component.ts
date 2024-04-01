@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MiniWarningService } from '../../services/mini-warning.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-add-sem-page',
@@ -16,10 +17,12 @@ export class AddSemPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private warning: MiniWarningService
+    private warning: MiniWarningService,
+    private data:DataService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.data.navigated()
     this.myForm = this.formBuilder.group({
       season: ['', Validators.required],
       year: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MiniWarningService } from '../../services/mini-warning.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-add-prof-page',
@@ -16,10 +17,12 @@ export class AddProfPageComponent {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private warning : MiniWarningService
+    private warning : MiniWarningService,
+    private data:DataService
   ) {}
 
   ngOnInit(): void {
+    this.data.navigated()
     this.myForm = this.formBuilder.group({
       professorName: ['', Validators.required],
     });
